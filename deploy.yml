@@ -1,0 +1,22 @@
+---
+# Criando POD para ReplicaSet
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 8
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: cgi
+        image: hectorvido/sh-cgi
+        ports:
+        - containerPort: 80

@@ -1,0 +1,16 @@
+---
+# Criando Role Binding
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: restart
+  namespace: paulo
+subjects:
+- kind: ServiceAccount
+  name: sa-restart
+  namespace: paulo
+roleRef:
+  kind: Role
+  name: restart
+  apiGroup: ""
+

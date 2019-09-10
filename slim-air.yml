@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: slim-air
+  name: slim-air
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slim-air
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: slim-air
+    spec:
+      containers:
+      - image: httpd:alpine
+        name: httpd
+        resources: {}
+status: {}

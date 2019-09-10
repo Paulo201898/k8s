@@ -1,0 +1,30 @@
+---
+# Criacao de POD
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  volumes:
+  - name: config-volume
+    configMap:
+      name: slim-air
+  containers:
+  - name: pod
+    image: httpd:alpine
+    env:
+    - name: CREDENCIAL
+      valueFrom:
+        secretKeyRef:
+          name: slim-air
+          key: CREDENTIAL
+    - name: SENHA
+      valueFrom:
+        secretKeyRef:
+          name: slim-air
+          key: PASSWORD
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: config-volume
+      mountPath: /propaganda

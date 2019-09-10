@@ -1,0 +1,12 @@
+---
+# Criacao de POD
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  containers:
+  - name: mysql
+    image: httpd:alpine
+    ports:
+    - containerPort: 80

@@ -1,0 +1,28 @@
+---
+# Criando JOB/CRON
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: limpador
+spec:
+  template:
+    metadata:
+      name: limpador
+    spec:
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
+          type: Socket
+      containers:
+      - name: limpador
+        image: hectorvido/docker-cli
+        volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+        command:
+        - "docker"
+        - "system"
+        - "prune"
+        - "-f"
+      restartPolicy: Never

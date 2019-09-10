@@ -1,0 +1,22 @@
+---
+# Criando CRONJOB com Service Account
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: restart-redis
+  namespace: paulo
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: sa-restart
+          containers:
+          - name: kubectl
+            image: hectorvido/kubectl
+            command:
+            - /bin/sh
+            - -c
+            - kubectl scale deploy decision-server --replicas=0 && sleep 5 && kubectl scale deploy decision-server --replicas=1
+          restartPolicy: OnFailure

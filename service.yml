@@ -1,0 +1,14 @@
+---
+# Criando Servicos
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-balancer
+spec:
+  selector:
+    app: web
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    nodePort: 30000

@@ -1,0 +1,19 @@
+---
+# Criando INGRESS
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app
+spec:
+  tls:
+  - hosts:
+    - app.192-168-99-100.nip.io
+    secretName: app
+  rules:
+  - host: app.192-168-99-100.nip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-balancer
+          servicePort: 80
